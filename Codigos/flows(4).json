@@ -1,0 +1,513 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Estación    Climatica",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "2e979e93dfb19d04",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "clima/iot",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "858dfd16926e14c8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 60,
+        "wires": [
+            [
+                "83a42182b2085837",
+                "a1bbb88ed244c5e0"
+            ]
+        ]
+    },
+    {
+        "id": "83a42182b2085837",
+        "type": "json",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 310,
+        "y": 60,
+        "wires": [
+            [
+                "cd901dff7460fde2",
+                "e0df361a8e5555d7",
+                "45919c67562a0292"
+            ]
+        ]
+    },
+    {
+        "id": "cd901dff7460fde2",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Temperatura",
+        "func": "msg.topic = msg.payload.zn;\nmsg.payload = msg.payload.temp;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 60,
+        "wires": [
+            [
+                "240e3e296bb48fb8",
+                "3e71cfa10b12ef97"
+            ]
+        ]
+    },
+    {
+        "id": "240e3e296bb48fb8",
+        "type": "ui_gauge",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "8d7af7566faa7ee2",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperatura",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "45",
+        "colors": [
+            "#1c71d8",
+            "#ff7800",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 770,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "e0df361a8e5555d7",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Humedad",
+        "func": "msg.topic = msg.payload.zn;\nmsg.payload = msg.payload.hum;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 300,
+        "wires": [
+            [
+                "d0401aa0cc921b15",
+                "9ce6fb4f0dd936dd"
+            ]
+        ]
+    },
+    {
+        "id": "d0401aa0cc921b15",
+        "type": "ui_gauge",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "4213395664a77119",
+        "order": 1,
+        "width": 8,
+        "height": 5,
+        "gtype": "wave",
+        "title": "Humedad",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#1c71d8",
+            "#ff7800",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 720,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "a1bbb88ed244c5e0",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 240,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "3e71cfa10b12ef97",
+        "type": "ui_chart",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "8d7af7566faa7ee2",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Historico_Temperatura",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "50",
+        "removeOlder": "2",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 780,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9ce6fb4f0dd936dd",
+        "type": "ui_chart",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "4213395664a77119",
+        "order": 2,
+        "width": 8,
+        "height": 5,
+        "label": "Historico_Humedad",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "2",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 750,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "77cfc39feea709e5",
+        "type": "ui_button",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "8d7af7566faa7ee2",
+        "order": 3,
+        "width": 8,
+        "height": 1,
+        "passthru": false,
+        "label": "clear",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "[]",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "str",
+        "x": 490,
+        "y": 120,
+        "wires": [
+            [
+                "3e71cfa10b12ef97"
+            ]
+        ]
+    },
+    {
+        "id": "0e7f12e45a464299",
+        "type": "ui_button",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "4213395664a77119",
+        "order": 3,
+        "width": 8,
+        "height": 1,
+        "passthru": false,
+        "label": "clear",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "[]",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "str",
+        "x": 490,
+        "y": 240,
+        "wires": [
+            [
+                "9ce6fb4f0dd936dd"
+            ]
+        ]
+    },
+    {
+        "id": "45919c67562a0292",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Query",
+        "func": "msg.topic = \"INSERT INTO clima (zona,temperatura,humedad) VALUES ('\" + msg.payload.zn + \"',\" + msg.payload.temp + \",\" + msg.payload.hum + \");\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 180,
+        "wires": [
+            [
+                "2a56da1fb025c38c"
+            ]
+        ]
+    },
+    {
+        "id": "2a56da1fb025c38c",
+        "type": "mysql",
+        "z": "f6f2187d.f17ca8",
+        "mydb": "30c15c85f5d3822c",
+        "name": "",
+        "x": 750,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8ba56aa71fcc7bb6",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "clima/iot/ventilador",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "858dfd16926e14c8",
+        "x": 510,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "397b27b5ba82ee3e",
+        "type": "ui_button",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "85b4cf69925a2cd4",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "on",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "green",
+        "className": "",
+        "icon": "",
+        "payload": "open",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 230,
+        "y": 420,
+        "wires": [
+            [
+                "8ba56aa71fcc7bb6",
+                "7e65de87b5e1e781"
+            ]
+        ]
+    },
+    {
+        "id": "7e65de87b5e1e781",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 380,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "9f4de7586e96bbd0",
+        "type": "ui_button",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "85b4cf69925a2cd4",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "off",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "red",
+        "className": "",
+        "icon": "",
+        "payload": "close",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 230,
+        "y": 480,
+        "wires": [
+            [
+                "8ba56aa71fcc7bb6"
+            ]
+        ]
+    },
+    {
+        "id": "858dfd16926e14c8",
+        "type": "mqtt-broker",
+        "name": "clima iot",
+        "broker": "35.156.86.157",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "8d7af7566faa7ee2",
+        "type": "ui_group",
+        "name": "Temperatura",
+        "tab": "f5695c414c1e4b51",
+        "order": 1,
+        "disp": true,
+        "width": 8,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4213395664a77119",
+        "type": "ui_group",
+        "name": "Humedad",
+        "tab": "f5695c414c1e4b51",
+        "order": 2,
+        "disp": true,
+        "width": 8,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "30c15c85f5d3822c",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "mysql",
+        "port": "3306",
+        "db": "Estacion_Climatica",
+        "tz": "-06:00",
+        "charset": "UTF8"
+    },
+    {
+        "id": "85b4cf69925a2cd4",
+        "type": "ui_group",
+        "name": "Ventilador",
+        "tab": "f5695c414c1e4b51",
+        "order": 5,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f5695c414c1e4b51",
+        "type": "ui_tab",
+        "name": "Clima",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
