@@ -1,0 +1,52 @@
+services: 
+  nodered:
+    image: nodered/node-red:latest
+    container_name: nodered
+    volumes:
+      - ~/DockerVolumes/NodeRED/data:/data
+    ports:
+      - "1880:1880"
+    networks:
+      - iot-network
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    volumes:
+      - ~/DockerVolumes/MariaDB/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+    ports:
+      - "3306:3306"
+    networks:
+      - iot-network
+  mosquitto:
+    image: eclipse-mosquitto
+    container_name: mosquitto
+    volumes:
+      - ~/DockerVolumes/Mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    networks:
+      - iot-network
+  
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin2025
+    ports:
+      - "3000:3000"
+    volumes:
+      - ~/DockerVolumes/Grafana/data:/var/lib/grafana
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    networks:
+      - iot-network
+
+networks:
+  iot-network:
+    driver: bridge
